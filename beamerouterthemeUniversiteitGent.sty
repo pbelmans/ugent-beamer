@@ -47,6 +47,7 @@
 % ----------------------------------------------------------------------------
 % *** DEFINE IMAGES <<<
 % ----------------------------------------------------------------------------
+\pgfdeclareimage[width=2cm]{logo}{logo}
 \pgfdeclareimage[width=\bannerwidth]{banner}{ugent-banner}
 
 % TODO just use 
@@ -90,10 +91,9 @@
   }%
 }{
   \newlength\logotopmargin%
-  \setlength\logotopmargin{0.704cm}%  0.55in* 64/127 *2.54cm/in
+  \setlength\logotopmargin{0.43cm}%  0.85cm * 64/127
   \defbeamertemplate*{headline}{ugent theme}%
   {%
-    % TODO Don't \vskip if the title is too long!
     \vskip\logotopmargin%
     \hskip\margin%
     \ifthenelse{ \boolean{beamer@dark} \OR \(\boolean{beamer@darktitle}\AND\c@framenumber=1\) }
@@ -115,15 +115,11 @@
 % *** FRAMETITLE <<<
 % ----------------------------------------------------------------------------
 \newlength\frametitletopmargin
-\ifbeamer@compress%
-  \setlength{\frametitletopmargin}{0.384cm}% 0.3in* 64/127 *2.54cm/in
-\else
-  \setlength{\frametitletopmargin}{0.9472cm}% 0.74in* 64/127 *2.54cm/in
-\fi
+\setlength\frametitletopmargin{0.25cm}
 
 \ifbeamer@dark\else%
-  \newlength{\frametitlewidth}
-  \setlength{\frametitlewidth}{\textwidth-\bannerwidth-\bannerpadding}
+  \newlength\frametitlewidth
+  \setlength\frametitlewidth{\textwidth-\bannerwidth-\bannerpadding}
 \fi
 
 \defbeamertemplate*{frametitle}{ugent theme}
@@ -134,26 +130,9 @@
     \raggedleft\insertframetitle\par%
     % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   \else%
-    \ifbeamer@compress%
-      \nointerlineskip%
-      \vskip-\bannerheight%
-      \vbox to \bannerheight{%
-        \vfil%
-        \leftskip=\bannerwidth%
-        \advance\leftskip by\bannerpadding%
-        % TODO To date (July 4, 2010), the beamer class cannot deal with actual
-        %      variables as arguments to "right". Hence, use the literal.
-        \begin{beamercolorbox}[right=1.1136cm]{frame title}%
-        \hfill\insertframetitle\par%
-        \end{beamercolorbox}%
-        \vfil%
-      }%
-    \else%
-      \medskip%
-      \begin{beamercolorbox}[right]{frame title}%
-        \insertframetitle\par%
-      \end{beamercolorbox}%
-    \fi%
+    \begin{beamercolorbox}[right]{frame title}%
+      \insertframetitle\par%
+    \end{beamercolorbox}%
   \fi%
 }
 % ----------------------------------------------------------------------------
@@ -165,24 +144,21 @@
 % ----------------------------------------------------------------------------
 % *** FOOTLINE <<<
 % ----------------------------------------------------------------------------
-% See the discussion above for the margin (pixel) quirks.
 
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \defbeamertemplate*{footline}{ugent theme dark}
 {%
   \ifthenelse{ \boolean{beamer@dark} \OR \(\boolean{beamer@darktitle}\AND\c@framenumber=1\) }
-  % *** THEN *** dark footline
   {%
     \pgftext[left,bottom]{}%
     \pgftext[right,bottom]{\pgfuseimage{banner}}%
   }
-  % *** ELSE *** light footline
   {%
      % page number
     \ifbeamer@framenumber%
       \ifnum\c@framenumber=1\else
-        \pgftext[right,bottom,at=\pgfpoint{0.98\paperwidth}{0.02\paperwidth}]{%
+        \pgftext[bottom,at=\pgfpoint{0.96\paperwidth}{0.02\paperwidth}]{%
           \usebeamerfont{frame number in foot}%
           \usebeamercolor[fg]{frame number in foot}\insertframenumber{}%
           \ifbeamer@totalframenumber%

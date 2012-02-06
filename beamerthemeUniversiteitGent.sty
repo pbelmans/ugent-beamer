@@ -8,8 +8,6 @@
 
 % -------------------------------------------------------------------------
 % introduce options
-\DeclareOptionBeamer{compress}{\beamer@compresstrue}
-
 \newif\ifbeamer@dark
 \beamer@darkfalse
 \DeclareOptionBeamer{dark}{\beamer@darktrue}
@@ -35,6 +33,8 @@
 \usefonttheme {UniversiteitGent}
 \usecolortheme{UniversiteitGent}
 \useoutertheme{UniversiteitGent}
+
+\beamertemplatenavigationsymbolsempty
 
 \mode
 <all>
