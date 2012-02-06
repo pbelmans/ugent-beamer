@@ -55,18 +55,7 @@
   \pgfdeclareimage[width=\bannerwidth]{banner}{banner}
 \fi
 
-% TODO just use 
-\ifthenelse{ \boolean{beamer@dark} \OR \boolean{beamer@darktitle} }
-% then
-{
-  \pgfdeclareimage[width=\paperwidth]{graffiti}{graffiti}
-}
-%else
-{}
-
-\ifbeamer@dark%
-  \pgfdeclareimage[width=\paperwidth]{graffiti}{graffiti}
-\fi
+\pgfdeclareimage[width=\paperwidth]{graffiti}{graffiti}
 
 % ----------------------------------------------------------------------------
 % *** END DEFINE IMAGES <<<
@@ -154,25 +143,17 @@
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \defbeamertemplate*{footline}{ugent theme dark}
 {%
-  \ifthenelse{ \boolean{beamer@dark} \OR \(\boolean{beamer@darktitle}\AND\c@framenumber=1\) }
-  {%
-    \pgftext[left,bottom]{}%
-    \pgftext[right,bottom]{\pgfuseimage{banner}}%
-  }
-  {%
-     % page number
-    \ifbeamer@framenumber%
-      \ifnum\c@framenumber=1\else
-        \pgftext[bottom,at=\pgfpoint{0.96\paperwidth}{0.02\paperwidth}]{%
-          \usebeamerfont{frame number in foot}%
-          \usebeamercolor[fg]{frame number in foot}\insertframenumber{}%
-          \ifbeamer@totalframenumber%
-            /\inserttotalframenumber%
-          \fi
-        }%
-      \fi
-    \fi%
-    }
+  \ifbeamer@framenumber%
+    \ifnum\c@framenumber=1\else
+      \pgftext[bottom,at=\pgfpoint{0.96\paperwidth}{0.02\paperwidth}]{%
+        \usebeamerfont{frame number in foot}%
+        \usebeamercolor[fg]{frame number in foot}\insertframenumber{}%
+        \ifbeamer@totalframenumber%
+          /\inserttotalframenumber%
+        \fi
+      }%
+    \fi
+  \fi%
 }%
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -196,21 +177,25 @@
 % ----------------------------------------------------------------------------
 % *** BACKGROUND <<<
 % ----------------------------------------------------------------------------
-\defbeamertemplate*{background canvas}{ugent theme}
+\defbeamertemplate{background canvas}{ugent theme}
 {%
   \ifthenelse{ \boolean{beamer@dark} \OR \(\boolean{beamer@darktitle}\AND\c@framenumber=1\) }
-  % *** THEN ***
-  {%
-    \pgfuseimage{graffiti}
-    \ifnum\c@framenumber=1%
-      \setbeamercolor{normal text}{bg=ugentblue}
-    \else%
-      \setbeamercolor{normal text}{bg=ugentblue50}
-    \fi%
-  }
-  % *** ELSE ***
   {}
+  {
+    \ifbeamer@graffiti{\pgfuseimage{graffiti}}{}
+  }
+    \ifbeamer@graffiti{\pgfuseimage{graffiti}}{}
 }
+
+\ifthenelse{ \boolean{beamer@dark} \OR \(\boolean{beamer@darktitle}\AND\c@framenumber=1\) }
+{%
+  \ifnum\c@framenumber=1%
+    \setbeamercolor{normal text}{bg=ugentblue}%
+  \else%
+    \setbeamercolor{normal text}{bg=ugentblue!90}%
+  \fi%
+}
+{}
 % ----------------------------------------------------------------------------
 % *** END BACKGROUND <<<
 % ----------------------------------------------------------------------------
