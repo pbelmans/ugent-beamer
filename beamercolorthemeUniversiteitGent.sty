@@ -9,31 +9,47 @@
 
 
 % =========================================================================
-% A good guess on what the UA colors could be.
-% -- The website is unfortunately not to the point there.
-\definecolor{uablue}{RGB}{0,61,100}
-\colorlet{uablue100}{uablue}
-\colorlet{uablue75} {uablue!75!white}
-\colorlet{uablue50} {uablue!50!white}
-\colorlet{uablue25} {uablue!25!white}
-\colorlet{uablue10} {uablue!10!white}
-\colorlet{uablue5}  {uablue!5!white}
+% Pantone 534: global
+\definecolor{ugentblue}{RGB}{10,30,96}
+\colorlet{ugentblue100}{ugentblue}
+\colorlet{ugentblue75} {ugentblue!75!white}
+\colorlet{ugentblue50} {ugentblue!50!white}
+\colorlet{ugentblue25} {ugentblue!25!white}
+\colorlet{ugentblue10} {ugentblue!10!white}
+\colorlet{ugentblue5}  {ugentblue!5!white}
+% Pantone 130: generic colour
+\definecolor{ugentyellow}{RGB}{255,179,0}
+\colorlet{ugentyellow100}{ugentyellow}
+\colorlet{ugentyellow75} {ugentyellow!75!white}
+\colorlet{ugentyellow50} {ugentyellow!50!white}
+\colorlet{ugentyellow25} {ugentyellow!25!white}
+\colorlet{ugentyellow10} {ugentyellow!10!white}
+\colorlet{ugentyellow5}  {ugentyellow!5!white}
 
-\definecolor{uared}{RGB}{126,0,47}
-\colorlet{uared100}{uared}
-\colorlet{uared75} {uared!75!white}
-\colorlet{uared50} {uared!50!white}
-\colorlet{uared25} {uared!25!white}
-\colorlet{uared10} {uared!10!white}
-\colorlet{uared5}  {uared!5!white}
+% Pantone 103c: Faculty of Literature & Philosophy
+\definecolor{ugent103c}{RGB}{198,173,15}
+% Pantone 485c: Faculty of Law
+\definecolor{ugent485c}{RGB}{204,12,0}
+\definecolor{ugent485c2}{RGB}{216,30,0} % not the actual 485, but looks closer
+% Pantone 292c: Faculty of Science
+\definecolor{ugent292c}{RGB}{117,178,221}
+% Pantone 702: Faculty of Health
+\definecolor{ugent702}{RGB}{214,96,109}
+% Pantone 272c: Faculty of Engineering
+\definecolor{ugent272c}{RGB}{94,104,196} % but there are other options
+% Pantone 556c: Faculty of Economy
+\definecolor{ugent556c}{RGB}{122,168,145}
+% Pantone 2583c: Faculty of Veterinary
+\definecolor{ugent2583c}{RGB}{148,79,165}
+% Pantone 1655c: Faculty of Psychology
+\definecolor{ugent1655c}{RGB}{249,86,2}
+% Pantone 3262c: Faculty of Bio-Engineering
+\definecolor{ugent3262c}{RGB}{0,193,181}
+% Pantone purple: Faculty of Pharmaceutical Stuff
+\definecolor{ugentpurple}{RGB}{165,68,153}
+% Pantone 375c: Faculty of Political and Social Science
+\definecolor{ugent375c}{RGB}{140,214,0}
 
-\definecolor{vividbrown}{RGB}{215,154,70}
-\colorlet{vividbrown100}{vividbrown}
-\colorlet{vividbrown75} {vividbrown!75!white}
-\colorlet{vividbrown50} {vividbrown!50!white}
-\colorlet{vividbrown25} {vividbrown!25!white}
-\colorlet{vividbrown10} {vividbrown!10!white}
-\colorlet{vividbrown5}  {vividbrown!5!white}
 % =========================================================================
 
 
@@ -42,15 +58,15 @@
   \setbeamercolor{structure}{fg=white}%
   \setbeamercolor{normal text}{fg=white}%
   \setbeamercolor{frametitle}{fg=white}%
-  \setbeamercolor{frame number in foot}{fg=uablue}%
+  \setbeamercolor{frame number in foot}{fg=ugentblue}%
 
   \setbeamercolor{frame number in head}{fg=white}%
 
 \else%
 
-  \setbeamercolor{structure}{fg=uablue}%
-  \setbeamercolor{normal text}{fg=uablue}%
-  \setbeamercolor{frametitle}{fg=uablue}%
+  \setbeamercolor{structure}{fg=ugentblue}%
+  \setbeamercolor{normal text}{fg=ugentblue}%
+  \setbeamercolor{frametitle}{fg=ugentblue}%
 
   \setbeamercolor{frame number in foot}{fg=white}%
 
@@ -58,7 +74,7 @@
       \setbeamercolor{title}{fg=white}%
       \setbeamercolor{subtitle}{fg=white}%
   \else
-      \setbeamercolor{subtitle}{fg=uared}%
+      \setbeamercolor{subtitle}{fg=ugentyellow}%
   \fi
 
 \fi
@@ -66,18 +82,18 @@
 
 % =======================================================================
 % alert color
-\setbeamercolor{alerted text}{fg=uared}
+\setbeamercolor{alerted text}{fg=ugentyellow}
 % =======================================================================
 
 % =======================================================================
 % blocks
-\setbeamercolor{block title}{use=structure,fg=white,bg=uablue}
-\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=uared}
-\setbeamercolor{block title example}{use=example text,fg=white,bg=uablue}
+\setbeamercolor{block title}{use=structure,fg=white,bg=ugentblue}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=ugentyellow}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=ugentblue}
 
-\setbeamercolor{block body}        {fg=uablue,use=block title,bg=uablue10}
-\setbeamercolor{block body alerted}{fg=uablue,use=block title alerted,bg=uared10}
-\setbeamercolor{block body example}{fg=uablue,use=block title example,bg=uablue10}
+\setbeamercolor{block body}        {fg=ugentblue,use=block title,bg=ugentblue10}
+\setbeamercolor{block body alerted}{fg=ugentblue,use=block title alerted,bg=ugentyellow10}
+\setbeamercolor{block body example}{fg=ugentblue,use=block title example,bg=ugentblue10}
 % =======================================================================
 
 
