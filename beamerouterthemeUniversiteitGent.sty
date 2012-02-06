@@ -48,7 +48,12 @@
 % *** DEFINE IMAGES <<<
 % ----------------------------------------------------------------------------
 \pgfdeclareimage[width=2cm]{logo}{logo}
-\pgfdeclareimage[width=\bannerwidth]{banner}{ugent-banner}
+
+\ifbeamer@faculty
+  \pgfdeclareimage[width=\bannerwidth]{banner}{\beamer@facultyvalue-\beamer@languagevalue}
+\else
+  \pgfdeclareimage[width=\bannerwidth]{banner}{banner}
+\fi
 
 % TODO just use 
 \ifthenelse{ \boolean{beamer@dark} \OR \boolean{beamer@darktitle} }

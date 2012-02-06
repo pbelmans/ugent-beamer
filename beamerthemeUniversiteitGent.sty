@@ -8,20 +8,24 @@
 
 % -------------------------------------------------------------------------
 % introduce options
-\newif\ifbeamer@dark
-\beamer@darkfalse
+\newif\ifbeamer@dark\beamer@darkfalse
 \DeclareOptionBeamer{dark}{\beamer@darktrue}
 
-\newif\ifbeamer@darktitle
-\beamer@darktitlefalse
+\newif\ifbeamer@faculty
+\beamer@facultyfalse
+\newcommand\beamer@facultyvalue{}
+\DeclareOptionBeamer{faculty}{\beamer@facultytrue\renewcommand\beamer@facultyvalue{#1}}
+
+\newcommand\beamer@languagevalue{dutch}
+\DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}
+
+\newif\ifbeamer@darktitle\beamer@darktitlefalse
 \DeclareOptionBeamer{darktitle}{\beamer@darktitletrue}
 
-\newif\ifbeamer@framenumber
-\beamer@framenumberfalse
+\newif\ifbeamer@framenumber\beamer@framenumberfalse
 \DeclareOptionBeamer{framenumber}{\beamer@framenumbertrue}
 
-\newif\ifbeamer@totalframenumber
-\beamer@totalframenumberfalse
+\newif\ifbeamer@totalframenumber\beamer@totalframenumberfalse
 \DeclareOptionBeamer{totalframenumber}{\beamer@totalframenumbertrue}
 
 \ProcessOptionsBeamer
