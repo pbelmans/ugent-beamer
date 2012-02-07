@@ -8,12 +8,6 @@
 
 % -------------------------------------------------------------------------
 % introduce options
-\newif\ifbeamer@dark\beamer@darkfalse
-\DeclareOptionBeamer{dark}{\beamer@darktrue}
-
-\newif\ifbeamer@graffiti\beamer@graffitifalse
-\DeclareOptionBeamer{graffiti}{\beamer@graffititrue}
-
 \newif\ifbeamer@faculty
 \beamer@facultyfalse
 \newcommand\beamer@facultyvalue{}
@@ -24,9 +18,6 @@
 
 \newcommand\beamer@languagevalue{dutch}
 \DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}
-
-\newif\ifbeamer@darktitle\beamer@darktitlefalse
-\DeclareOptionBeamer{darktitle}{\beamer@darktitletrue}
 
 \newif\ifbeamer@framenumber\beamer@framenumberfalse
 \DeclareOptionBeamer{framenumber}{\beamer@framenumbertrue}

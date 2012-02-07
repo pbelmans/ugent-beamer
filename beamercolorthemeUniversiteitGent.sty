@@ -43,55 +43,38 @@
 % switch between the generic yellow use of highlights or faculty specific colours
 \ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolours} }
 {
-  \colorlet{ugenthighlightalternative}{ugentyellow}
-  \colorlet{ugenthighlight}      {ugent-\beamer@facultyvalue}
+  \colorlet{ugentalert}  {ugent-\beamer@facultyvalue}
+  \colorlet{ugentexample}{ugentyellow}
 }
 {
-  \colorlet{ugenthighlight}      {ugentyellow}
-  \ifbeamer@faculty
-    \colorlet{ugenthighlightalternative}{ugent-\beamer@facultyvalue}
-  \else
-    \colorlet{ugenthighlightalternative}{ugentyellow}
-  \fi
+  \colorlet{ugentalert}  {ugentyellow}
+  \colorlet{ugentexample}{ugentblue}
 }
 
 % =========================================================================
 
 
-\ifbeamer@dark%
-  \setbeamercolor{structure}           {fg = white}%
-  \setbeamercolor{normal text}         {fg = white}%
-  \setbeamercolor{frametitle}          {fg = white}%
-  \setbeamercolor{frame number in foot}{fg = ugentblue}%
-  \setbeamercolor{frame number in head}{fg = white}%
-\else%
-  \setbeamercolor{structure}           {fg = ugentblue}%
-  \setbeamercolor{normal text}         {fg = ugentblue}%
-  \setbeamercolor{frametitle}          {fg = ugentblue}%
-  \setbeamercolor{frame number in foot}{fg = ugentblue}%
-  \ifbeamer@darktitle%
-    \setbeamercolor{title}   {fg = white}%
-    \setbeamercolor{subtitle}{fg = white}%
-  \else
-    \setbeamercolor{subtitle}{fg = ugentyellow}%
-  \fi
-\fi
+\setbeamercolor{structure}           {fg = ugentblue}%
+\setbeamercolor{normal text}         {fg = ugentblue}%
+\setbeamercolor{frametitle}          {fg = ugentblue}%
+\setbeamercolor{frame number in foot}{fg = ugentblue}%
+\setbeamercolor{subtitle}            {fg = ugentyellow}%
 
 
 % =======================================================================
 % alert color
-\setbeamercolor{alerted text}{fg=ugenthighlight}
+\setbeamercolor{alerted text}{fg=ugentalert}
 % =======================================================================
 
 % =======================================================================
 % blocks
 \setbeamercolor{block title}{use=structure,fg=white,bg=ugentblue}
-\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=ugenthighlight}
-\setbeamercolor{block title example}{use=example text,fg=white,bg=ugenthighlightalternative}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=ugentalert}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=ugentexample}
 
 \setbeamercolor{block body}        {fg=ugentblue,use=block title,bg=ugentblue!10!white}
-\setbeamercolor{block body alerted}{fg=ugentblue,use=block title alerted,bg=ugenthighlight!10!white}
-\setbeamercolor{block body example}{fg=ugentblue,use=block title example,bg=ugenthighlightalternative!10!white}
+\setbeamercolor{block body alerted}{fg=ugentblue,use=block title alerted,bg=ugentalert!10!white}
+\setbeamercolor{block body example}{fg=ugentblue,use=block title example,bg=ugentexample!10!white}
 % =======================================================================
 
 
