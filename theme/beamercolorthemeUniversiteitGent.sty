@@ -14,8 +14,8 @@
 
 \input{colors}
 
-% switch between the generic yellow use of highlights or faculty specific colours
-\ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolours} }
+% switch between the generic yellow use of highlights or faculty specific colors
+\ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolors} }
 {
   \colorlet{ugentalert}  {ugent-\beamer@facultyvalue}
   \colorlet{ugentexample}{ugentyellow}
@@ -26,7 +26,7 @@
 }
 
 
-% general colours
+% general colors
 \setbeamercolor{structure}           {fg = ugentblue}%
 \setbeamercolor{normal text}         {fg = ugentblue}%
 \setbeamercolor{frametitle}          {fg = ugentblue}%
@@ -34,7 +34,7 @@
 \setbeamercolor{subtitle}            {fg = ugentyellow}%
 \setbeamercolor{author}              {fg = ugentblue}%
 
-% alert colour
+% alert color
 \setbeamercolor{alerted text}{fg=ugentalert}
 
 % blocks
