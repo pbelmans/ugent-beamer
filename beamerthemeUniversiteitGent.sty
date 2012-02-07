@@ -19,6 +19,9 @@
 \newcommand\beamer@facultyvalue{}
 \DeclareOptionBeamer{faculty}{\beamer@facultytrue\renewcommand\beamer@facultyvalue{#1}}
 
+\newif\ifbeamer@usefacultycolours\beamer@usefacultycoloursfalse
+\DeclareOptionBeamer{usecolours}{\beamer@usefacultycolourstrue}
+
 \newcommand\beamer@languagevalue{dutch}
 \DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}
 

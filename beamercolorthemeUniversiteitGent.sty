@@ -5,50 +5,51 @@
 % 1. under the LaTeX Project Public License and/or
 % 2. under the GNU Public License.
 
+\RequirePackage{ifthen}
+
 \mode<presentation>
 
 
-% =========================================================================
 % Pantone 534: global
 \definecolor{ugentblue}{RGB}{10,30,96}
-\colorlet{ugentblue100}{ugentblue}
-\colorlet{ugentblue75} {ugentblue!75!white}
-\colorlet{ugentblue50} {ugentblue!50!white}
-\colorlet{ugentblue25} {ugentblue!25!white}
-\colorlet{ugentblue10} {ugentblue!10!white}
-\colorlet{ugentblue5}  {ugentblue!5!white}
 % Pantone 130: generic colour
 \definecolor{ugentyellow}{RGB}{255,179,0}
-\colorlet{ugentyellow100}{ugentyellow}
-\colorlet{ugentyellow75} {ugentyellow!75!white}
-\colorlet{ugentyellow50} {ugentyellow!50!white}
-\colorlet{ugentyellow25} {ugentyellow!25!white}
-\colorlet{ugentyellow10} {ugentyellow!10!white}
-\colorlet{ugentyellow5}  {ugentyellow!5!white}
+
 
 % Pantone 103c: Faculty of Literature & Philosophy
-\definecolor{ugent103c}{RGB}{198,173,15}
+\definecolor{ugent-lw}{RGB}{198,173,15}
 % Pantone 485c: Faculty of Law
-\definecolor{ugent485c}{RGB}{204,12,0}
-\definecolor{ugent485c2}{RGB}{216,30,0} % not the actual 485, but looks closer
+\definecolor{ugent-re}{RGB}{204,12,0}
+\definecolor{ugent-re2}{RGB}{216,30,0} % not the actual 485, but looks closer
 % Pantone 292c: Faculty of Science
-\definecolor{ugent292c}{RGB}{117,178,221}
+\definecolor{ugent-we}{RGB}{117,178,221}
 % Pantone 702: Faculty of Health
-\definecolor{ugent702}{RGB}{214,96,109}
+\definecolor{ugent-ge}{RGB}{214,96,109}
 % Pantone 272c: Faculty of Engineering
-\definecolor{ugent272c}{RGB}{94,104,196} % but there are other options
+\definecolor{ugent-tw}{RGB}{94,104,196} % but there are other options
 % Pantone 556c: Faculty of Economy
-\definecolor{ugent556c}{RGB}{122,168,145}
+\definecolor{ugent-eb}{RGB}{122,168,145}
 % Pantone 2583c: Faculty of Veterinary
-\definecolor{ugent2583c}{RGB}{148,79,165}
+\definecolor{ugent-de}{RGB}{148,79,165}
 % Pantone 1655c: Faculty of Psychology
-\definecolor{ugent1655c}{RGB}{249,86,2}
+\definecolor{ugent-pp}{RGB}{249,86,2}
 % Pantone 3262c: Faculty of Bio-Engineering
-\definecolor{ugent3262c}{RGB}{0,193,181}
+\definecolor{ugent-la}{RGB}{0,193,181}
 % Pantone purple: Faculty of Pharmaceutical Stuff
-\definecolor{ugentpurple}{RGB}{165,68,153}
+\definecolor{ugent-fw}{RGB}{165,68,153}
 % Pantone 375c: Faculty of Political and Social Science
-\definecolor{ugent375c}{RGB}{140,214,0}
+\definecolor{ugent-ps}{RGB}{140,214,0}
+
+% switch between the generic yellow use of highlights or faculty specific colours
+\ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolours} }
+{
+  \colorlet{ugenthighlight}      {ugent-\beamer@facultyvalue}
+  \colorlet{ugenthighlightshaded}{ugent-\beamer@facultyvalue!10!white}
+}
+{
+  \colorlet{ugenthighlight}      {ugentyellow}
+  \colorlet{ugenthighlightshaded}{ugentyellow!10!white}
+}
 
 % =========================================================================
 
@@ -81,12 +82,12 @@
 % =======================================================================
 % blocks
 \setbeamercolor{block title}{use=structure,fg=white,bg=ugentblue}
-\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=ugentyellow}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=ugenthighlight}
 \setbeamercolor{block title example}{use=example text,fg=white,bg=ugentblue}
 
-\setbeamercolor{block body}        {fg=ugentblue,use=block title,bg=ugentblue10}
-\setbeamercolor{block body alerted}{fg=ugentblue,use=block title alerted,bg=ugentyellow10}
-\setbeamercolor{block body example}{fg=ugentblue,use=block title example,bg=ugentblue10}
+\setbeamercolor{block body}        {fg=ugentblue,use=block title,bg=ugentblue!10!white}
+\setbeamercolor{block body alerted}{fg=ugentblue,use=block title alerted,bg=ugenthighlightshaded}
+\setbeamercolor{block body example}{fg=ugentblue,use=block title example,bg=ugentblue!10!white}
 % =======================================================================
 
 
