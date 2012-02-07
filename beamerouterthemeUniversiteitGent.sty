@@ -13,8 +13,6 @@
 % Instead, define a multiplier 12.8/(10.0*2.54) = 64/127 and adjust all
 % respective lengths.
 
-
-\RequirePackage{calc}
 \RequirePackage{ifthen}
 
 \mode<presentation>
@@ -26,12 +24,12 @@
 \newlength\bannerwidth
 \setlength\bannerwidth{11.94cm}% (10in - 2*0.85cm) * 64/127
 
-\newlength\logotopmargin%
-\setlength\logotopmargin{0.43cm}%  0.85cm * 64/127
+\newlength\bannertopmargin%
+\setlength\bannertopmargin{0.43cm}%  0.85cm * 64/127
 
 
 % images
-\pgfdeclareimage[width=2cm]{logo}{logo}
+\pgfdeclareimage[width=3cm]{logo}{logo}
 
 \ifbeamer@faculty
   \pgfdeclareimage[width=\bannerwidth]{banner}{\beamer@facultyvalue-\beamer@languagevalue}
@@ -43,18 +41,20 @@
 % headline
 \defbeamertemplate*{headline}{ugent theme}%
 {%
-  \vskip\logotopmargin%
+  \vskip\bannertopmargin%
   \hskip\margin%
   \pgfuseimage{banner}%
 }
 
+% frametitle
 \defbeamertemplate*{frametitle}{ugent theme}
 {%
   \begin{beamercolorbox}[right]{frame title}%
-    \insertframetitle\par%
+    \insertframetitle\vskip-.5cm%
   \end{beamercolorbox}%
 }
 
+% footline
 \defbeamertemplate*{footline}{ugent theme}
 {%
   \ifbeamer@framenumber%
@@ -70,9 +70,11 @@
   \fi%
 }%
 
+% margins
 \setbeamersize{text margin left=2\margin,%
                text margin right=2\margin}
 
+% background
 \defbeamertemplate*{background canvas}{ugent theme}
 {%
 }

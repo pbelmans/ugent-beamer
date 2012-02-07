@@ -6,7 +6,6 @@
 % 2. under the GNU Public License.
 
 
-% -------------------------------------------------------------------------
 % introduce options
 \newif\ifbeamer@faculty
 \beamer@facultyfalse
@@ -26,8 +25,8 @@
 \DeclareOptionBeamer{totalframenumber}{\beamer@totalframenumbertrue}
 
 \ProcessOptionsBeamer
-% -------------------------------------------------------------------------
 
+% actual configuration
 \mode<presentation>
 
 \useinnertheme{UniversiteitGent}
@@ -35,6 +34,7 @@
 \usecolortheme{UniversiteitGent}
 \useoutertheme{UniversiteitGent}
 
+% I don't like navigational symbols, neither should you
 \beamertemplatenavigationsymbolsempty
 
 \mode

@@ -7,39 +7,27 @@
 
 \mode<presentation>
 
-% ----------------------------------------------------------------------------
-% *** TITLE PAGE <<<
-% ----------------------------------------------------------------------------
 \defbeamertemplate*{title page}{ugent theme}
 {
-  \pgfuseimage{logo}\hspace{2cm}%
-
-  \raggedleft\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par%
-  \ifx\insertsubtitle\@empty%
-  \else%
-    \vskip2ex%
-    {\raggedright\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-  \fi%
-  \ifx\insertauthor\@empty%
-  \else%
-    \vskip2ex%
-    {\raggedright\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
-  \fi%
+  \begin{center}
+    \pgfuseimage{logo}%
+    \vskip1cm
+    \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle%
+    \ifx\insertsubtitle\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle%
+    \fi%
+    \ifx\insertauthor\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor%
+    \fi%
+  \end{center}
   \vfill%
 }
-% ----------------------------------------------------------------------------
-% *** END TITLE PAGE >>>
-% ----------------------------------------------------------------------------
 
-
-% ----------------------------------------------------------------------------
-% *** BLOCKS <<<
-% ----------------------------------------------------------------------------
 \setbeamertemplate{blocks}[rounded]
-% ----------------------------------------------------------------------------
-% *** END BLOCKS >>>
-% ----------------------------------------------------------------------------
-
 
 \mode
 <all>
