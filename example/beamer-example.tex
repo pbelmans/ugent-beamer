@@ -1,0 +1,86 @@
+\documentclass{beamer}
+\usepackage{lipsum}
+
+%\usetheme[framenumber,totalframenumber]{UniversiteitGent}
+%\usetheme[faculty=di,framenumber,totalframenumber]{UniversiteitGent}
+%\usetheme[faculty=we,usecolors,framenumber,totalframenumber]{UniversiteitGent}
+\usetheme[faculty=lw,language=english,framenumber,totalframenumber]{UniversiteitGent}
+
+\title{Some slides with a UGent \texttt{beamer} theme}
+\subtitle{This is a dummy subtitle}
+\author{Pieter Belmans}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{My section}
+\subsection{My subsection}
+
+\begin{frame}
+  \frametitle{A first test frame}
+
+  \lipsum[2]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Test frame with overflow}
+
+  \lipsum[2-3]
+\end{frame}
+
+\begin{frame}
+  \frametitle{The is a test frame with a pretty long frame title}
+
+  \lipsum[2]
+\end{frame}
+
+
+\subsection{My subsection 2}
+\begin{frame}
+  \frametitle{Test frame with itemize}
+
+  \begin{itemize}
+    \item<1-> firstly
+    \item<2-> secondly
+      \begin{itemize}
+        \item sub-item
+        \item another sub-item
+      \end{itemize}
+    \item<3-> thirdly
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A math frame}
+  
+  \begin{theorem}[Pythagoras]
+    The square of the hypotenuse of a \alert{right} triangle is equal to the sum of the squares on the other two sides:
+    \[
+      a^2 + b^2 = c^2.
+    \]
+  \end{theorem}
+  \begin{proof}
+    Straightforward.
+  \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Environments}
+  
+  \begin{definition}
+    A \textbf{prime number} (or a prime) is a natural number which has exactly two distinct natural number divisors: 1 and itself. 
+  \end{definition}
+  
+  \begin{exampleblock}{Example}
+    The first five prime numbers are $2$, $3$, $5$, $7$, and $11$.
+  \end{exampleblock}
+  
+  \begin{alertblock}{Alert block}
+    Note that $1$ is not a prime number.
+  \end{alertblock}
+\end{frame}
+
+\end{document}
