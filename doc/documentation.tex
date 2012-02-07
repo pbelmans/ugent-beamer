@@ -2,6 +2,7 @@
 \usepackage{amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{subfig}
 \usepackage{tabulary}
 \usepackage{tikz}
 \usepackage{todonotes}
@@ -86,49 +87,40 @@ $ kpsewhich beamerfontthemeUniversiteitGent.sty
 If everything seems okay, you can check whether you can actually produce a presentation with the UGent theme by either creating a minimal test file (see listing \ref{listing:minimal-example}) or by compiling the \LaTeX-document provided in the \lstinline!example/! folder of this package. 
 
 
-%\begin{figure}
-%\centering
-%\setlength{\figurewidth}{6cm}
-%\subfloat[][The first two pages with light theming (default).]{%
-%\frame{\includegraphics[width=\figurewidth]{figures/light-page1}}%
-%\qquad
-%\frame{\includegraphics[width=\figurewidth]{figures/light-page2}}%
-%}
-%
-%\subfloat[][The first two pages with dark theming (option \lstinline!dark!).]{%
-%\frame{\includegraphics[width=\figurewidth]{figures/dark-page1}}%
-%\qquad
-%\frame{\includegraphics[width=\figurewidth]{figures/dark-page2}}%
-%}
-%
-%\caption{The first two pages of PDF output of the example file in \lstinline!example/!, with light and dark theming. The theme is loaded with the option \lstinline!framenumber! and the \texttt{beamer} package itself with \lstinline!compress!. Note that it is also possible the combine the dark title page with light content pages (option \lstinline!darktitle!, see below).}
-%\label{fig:example1}
-%\end{figure}
-%
-%\begin{note}
-%You might need to install more \LaTeX{} packages when running the provided example file (e.g., the \texttt{lipsum} package).
-%\end{note}
-%
-%\begin{lstlisting}[float,caption={A minimalistic test file for the UA Beamer theme.},captionpos=b,label=listing:minex,abovecaptionskip=\bigskipamount]
-%\documentclass{beamer}
-%
-%\usetheme{UniversiteitAntwerpen}
-%
-%\begin{document}
-%
-%\begin{frame}
-%Hello world!
-%\end{frame}
-%
-%\end{document}
-%\end{lstlisting}
-%
-%\input{options.tex}
-%
-%\input{colors.tex}
-%
-%\input{fonts.tex}
+\begin{figure}
+  \centering
+  \setlength{\figurewidth}{6cm}
+  \subfloat[][The first two pages, no faculty specified.]{%
+    \frame{\includegraphics[width=\figurewidth]{figures/slide-1}}%
+    \qquad
+    \frame{\includegraphics[width=\figurewidth]{figures/slide-2}}%
+  }
 
+  \subfloat[][The first two pages, with \lstinline|faculty=lw| and \lstinline|language=english| specified.]{%
+    \frame{\includegraphics[width=\figurewidth]{figures/slide-faculty-1}}%
+    \qquad
+    \frame{\includegraphics[width=\figurewidth]{figures/slide-faculty-2}}%
+  }
+\end{figure}
+
+\begin{note}
+  You might need to install more \LaTeX{} packages when running the provided example file (e.g., the \texttt{lipsum} package).
+\end{note}
+
+\begin{lstlisting}[float,caption={A minimalistic test file for the UA Beamer theme.},captionpos=b,label=listing:minex,abovecaptionskip=\bigskipamount]
+\documentclass{beamer}
+
+\usetheme{UniversiteitGent}
+
+\begin{document}
+
+\begin{frame}
+  \frametitle{Example}
+  Hello world!
+\end{frame}
+
+\end{document}
+\end{lstlisting}
 
 
 \section{Theme options}
@@ -163,10 +155,10 @@ The theme comes with several options, all of which can be given in a comma-separ
 \subsection{Background on the official colors}
 
 \begin{note}
-If you don't care about the technical details, you can skip this and directly go to subsection \ref{subsection:usingthecolors}.
+  If you don't care about the technical details, you can skip this and directly go to subsection \ref{subsection:usingthecolors}.
 \end{note}
 
-The two official colors of the UA, a blue and a red tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
+The two official colors of the UGent, a blue and a red tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
 
 The PMS format is richer than RGB in the sense that it can embrace fluorescence effects, gold or silver shine, special coatings (matte and brilliant), in general everything that has to do with the actual appearance of the color on the medium. It comes thus as no surprise that there is no (exact) mapping between the PMS and RGB color spaces; more specifically: the mapping -- if it exists -- is device-dependent.
 
@@ -178,45 +170,11 @@ The \emph{only} way to get a perfect PMS 1955 red, for example, is to have a the
 When the computer screen or any other non-PMS-ready medium is the primary output source, having such rigorous rules may be rather obstructive. To overcome such restrictions, many vendors of graphical software try to translate PMS into RGB/CMYK by making use of special monitor color calibration data (e.g., the ICC color profiles, \lstinline!.icc!). Unfortunately, if files containing PMS color information are displayed (printed) with programs (printers) which do not support PMS mechanisms (which is most often the case in non-professional environments), the color output will look disturbed. On top of that, and surprisingly for the novice, the output will look disturbed in different ways on different screens (printers) because of the inherent device-dependence of PMS.
 
 %To overcome the undesired side-effects of working with the official UA corporate design in a non-PMS environment (like most beamers and computer screens should provide),
-That is why this theme aims to use non-PMS versions of the UA's official colors, including modified versions of the logos.
+That is why this theme aims to use non-PMS versions of the UA's official colors, including modified versions of the logos.\todo{what should I do?}
 
-\begin{table}
-\centering
-\newlength{\boxsize}
-\setlength{\boxsize}{2cm}
+Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UGent \cite{KAN::}, you'll find particular RGB and CMYK values, other resources, e.g., \cite{::TDC}, provide other numbers (see table \ref{table:reds-blues}).
 
-\begin{tabular}{cccc}
-\definecolor{ugentblue11}{RGB}{  0, 61,100}
-\colorbox{ugentblue11}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentblue12}{cmyk}{1,0.3,0,0.62}
-\colorbox{ugentblue12}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentblue13}{RGB}{0,96,128}
-\colorbox{ugentblue13}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentblue14}{cmyk}{1,0.25,0,0.5}
-\colorbox{ugentblue14}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}\\[2mm]
-\definecolor{ugentyellow11}{RGB}{126,  0, 47}
-\colorbox{ugentyellow11}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentyellow11}{cmyk}{0,1,0.54,0.46}
-\colorbox{ugentyellow11}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentyellow11}{RGB}{161,0,64}
-\colorbox{ugentyellow11}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-&
-\definecolor{ugentyellow11}{cmyk}{0,1,0.6,0.37}
-\colorbox{ugentyellow11}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
-\end{tabular}
-
-\caption{PMS 302 and PMS 1955 translated to CMYK/RGB in different ways. Left to right: UA website \cite{KAN::} RGB, UA website \cite{KAN::} CMYK, conversion chart \cite{::TDC} RGB, conversion chart \cite{::TDC} CMYK. To determine which version is closest to the actual colors PMS 1955 and PMS 302 on your monitor/printer/beamer, you would need a physical color sample (such as provided on the Pantone\textsuperscript{\textregistered} charts) to compare.}
-\label{table:reds-blues}
-\end{table}
-
-Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UA \cite{KAN::}, you'll find particular RGB and CMYK values, other resources, e.g., \cite{::TDC}, provide other numbers (see table \ref{table:reds-blues}).
-
-For the sake of consistency between RGB and CMYK values, the \texttt{beamer} theme uses the CMYK values for PMS 302 and PMS 1955 provided on \cite{::TDC} for reference (see table \ref{table:reds-blues}, last column, and table \ref{table:allcolors}).
+For the sake of consistency between RGB and CMYK values, the UGent \texttt{beamer} theme uses the CMYK values for PMS 302 and PMS 1955 provided on \cite{::TDC} for reference (see table \ref{table:reds-blues}, last column, and table \ref{table:allcolors}).
 
 \subsection{Using the colors}\label{subsection:usingthecolors}
 
@@ -226,12 +184,12 @@ Getting a consistent look-and-feel throughout your presentations requires sticki
 Although essentially consistent of only two colors, within \texttt{beamer} referred to as \lstinline!ugentblue! and \lstinline!ugentyellow!, provide more diversity than one might expect and should be  \emph{exclusively} used  in all the slides. The user should be aware that this directive includes \emph{tables, figures, and graphics of most kinds}. For an example of usage see figure \ref{fig:coloredgraphs}.
 
 \begin{figure}
-\setlength{\figurewidth}{10cm}
-\setlength{\figureheight}{5cm}
-\centering
-%\input{figures/graphs.tikz}
-\caption{Example usage of the official colors within a set of graphs, using also the exception color.}
-\label{fig:coloredgraphs}
+  \setlength\figurewidth{10cm}
+  \setlength\figureheight{5cm}
+  \centering
+  %\input{figures/graphs.tikz}
+  \caption{Example usage of the official colors within a set of graphs, using also the exception color.}
+  \label{figure:coloredgraphs}
 \end{figure}
 
 If you need to emphasize a particular aspect in your slides (graphs, tables), you can (within \texttt{beamer}) use the \lstinline!\alert{}! macro (e.g., \lstinline!\alert{This is alerted text.}!). For the situation where something needs to stick out in a pie chart, for example, where the ordinary colors (UA blue and red) have been used up already, a third color has been added (see table \ref{table:allcolors}). It is to be used scarcely and strictly for highlighting purposes (see, for example, figure \ref{fig:coloredgraphs}).
@@ -250,15 +208,15 @@ CMYK & (25, 8, 0, 16)  & (10, 3, 0, 6)   & (5, 2, 0, 3)\\
 RGB  & (166, 209, 222) & (218, 235, 242) & (235, 245, 247)\\
 \texttt{beamer} name & \lstinline!ugentblue25! & \lstinline!ugentblue10! & \lstinline!ugentblue5!\\\midrule
 
-%Color sample & \colorsquare{\figurewidth}{ugentyellow100} & \colorsquare{\figurewidth}{ugentyellow75} & \colorsquare{\figurewidth}{ugentyellow50}\\
-%CMYK & (0, 100, 54, 46) & (0, 75, 41, 35) & (0, 50, 27, 23)\\
-%RGB  & (161, 0, 64)     & (184, 46, 101)  & (207, 103, 145)\\
-%\texttt{beamer} name & \lstinline!ugentyellow100! & \lstinline!ugentyellow75! & \lstinline!ugentyellow50!\\[3mm]
-%Color sample & \colorsquare{\figurewidth}{ugentyellow25} & \colorsquare{\figurewidth}{ugentyellow10} & \colorsquare{\figurewidth}{ugentyellow5}\\
-%CMYK & (0, 25, 14, 12)  & (0, 10, 5, 5)   & (0, 5, 3, 2)\\
-%RGB  & (232, 174, 197) & (245, 220, 230) & (250, 237, 242)\\
-%\texttt{beamer} name & \lstinline!ugentyellow25! & \lstinline!ugentyellow10! & \lstinline!ugentyellow5!\\\midrule
-%
+Color sample & \colorsquare{\figurewidth}{ugentyellow!100!white} & \colorsquare{\figurewidth}{ugentyellow!75!white} & \colorsquare{\figurewidth}{ugentyellow!50!white}\\
+CMYK & (0, 100, 54, 46) & (0, 75, 41, 35) & (0, 50, 27, 23)\\
+RGB  & (161, 0, 64)     & (184, 46, 101)  & (207, 103, 145)\\
+\texttt{beamer} name & \lstinline|ugentyellow!100!white| & \lstinline|ugentyellow!75!white| & \lstinline|ugentyellow!50!white| \\[3mm]
+Color sample & \colorsquare{\figurewidth}{ugentyellow!25!white} & \colorsquare{\figurewidth}{ugentyellow!10!white} & \colorsquare{\figurewidth}{ugentyellow!5!white}\\
+CMYK & (0, 25, 14, 12)  & (0, 10, 5, 5)   & (0, 5, 3, 2)\\
+RGB  & (232, 174, 197) & (245, 220, 230) & (250, 237, 242)\\
+\texttt{beamer} name & \lstinline|ugentyellow!25!white| & \lstinline|ugentyellow!10!white| & \lstinline|ugentyellow!5!white| \\\midrule
+
 %Color sample & \colorsquare{\figurewidth}{vividbrown} & \colorsquare{\figurewidth}{vividbrown75} & \colorsquare{\figurewidth}{vividbrown50}\\
 %CMYK & (0, 28, 67, 16) & (0, 20, 48, 12) & (0, 13, 31, 8)\\
 %RGB  & (215, 154, 70) & (225, 179, 116)  & (235, 205, 163)\\
