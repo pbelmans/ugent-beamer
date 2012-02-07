@@ -1,4 +1,7 @@
-% Copyright 2009 by Nico Schlömer
+% Copyright 2012 Pieter Belmans
+% https://github.com/pbelmans/ugent-beamer
+%
+% Based on Nico Schlömer's ua-beamer (https://github.com/pbelmans/ugent-beamer)
 %
 % This file may be distributed and/or modified
 %
@@ -22,6 +25,11 @@
     \else%
       \vskip2ex%
       \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor%
+    \fi%
+    \ifx\insertinstitution\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{author}\usebeamercolor[fg]{author}\insertinstitute%
     \fi%
   \end{center}
   \vfill%

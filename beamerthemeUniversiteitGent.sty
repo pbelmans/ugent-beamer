@@ -1,4 +1,7 @@
-% Copyright 2009--2011 by Nico Schlömer
+% Copyright 2012 Pieter Belmans
+% https://github.com/pbelmans/ugent-beamer
+%
+% Based on Nico Schlömer's ua-beamer (https://github.com/pbelmans/ugent-beamer)
 %
 % This file may be distributed and/or modified
 %
@@ -14,6 +17,9 @@
 
 \newif\ifbeamer@usefacultycolours\beamer@usefacultycoloursfalse
 \DeclareOptionBeamer{usecolours}{\beamer@usefacultycolourstrue}
+
+\newif\ifbeamer@footline\beamer@footlinefalse
+\DeclareOptionBeamer{footline}{\beamer@footlinetrue}
 
 \newcommand\beamer@languagevalue{dutch}
 \DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}

@@ -1,11 +1,14 @@
-% Copyright 2009--2011 by Nico Schlömer
+% Copyright 2012 Pieter Belmans
+% https://github.com/pbelmans/ugent-beamer
+%
+% Based on Nico Schlömer's ua-beamer (https://github.com/pbelmans/ugent-beamer)
 %
 % This file may be distributed and/or modified
 %
 % 1. under the LaTeX Project Public License and/or
 % 2. under the GNU Public License.
 
-% UA page geometry
+% UGent page geometry
 % \geometry{paperheight=7.5in,paperwidth=10.0in}
 % ... Hang on! As suggested in the manual, don't mess around with beamer's
 % assumed page dimensions (128mm x 96mm). Fonts, for example, do no get 
@@ -57,9 +60,13 @@
 % footline
 \defbeamertemplate*{footline}{ugent theme}
 {%
+  \ifbeamer@footline
+    \pgftext[bottom, left, at = \pgfpoint{0.02\paperwidth}{0.02\paperwidth}]{\insertinstitute}%
+    \pgftext[bottom, at = \pgfpoint{0.5\paperwidth}{0.02\paperwidth}]{\insertauthor}%
+  \fi
   \ifbeamer@framenumber%
     \ifnum\c@framenumber=1\else
-      \pgftext[bottom,at=\pgfpoint{0.96\paperwidth}{0.02\paperwidth}]{%
+      \pgftext[bottom, right, at = \pgfpoint{0.96\paperwidth}{0.02\paperwidth}]{%
         \usebeamerfont{frame number in foot}%
         \usebeamercolor[fg]{frame number in foot}\insertframenumber{}%
         \ifbeamer@totalframenumber%
