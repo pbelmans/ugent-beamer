@@ -1,7 +1,9 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage{amsthm}
 \usepackage{booktabs}
+\usepackage[margin=1.4in]{geometry}
 \usepackage{graphicx}
+\usepackage{pgfplots}
 \usepackage{subfig}
 \usepackage{tabulary}
 \usepackage{tikz}
@@ -79,7 +81,7 @@ You are free to improve and extend the implementation, preferably by forking and
 \subsection{First run}
 Once you have the files, all that is required for the theme to work is putting the files into a directory where \LaTeX{} can find them. This boils down to mimicking the so called TDS (or \TeX\ Directory Structure).
 
-In case you're using Unix you need to have a local directory (this probably will be \verb|~/texmf/|) and you need to place all the files from the \verb|theme/| folder in the directory \verb|~/texmf/tex/latex/beamer/themes/UGent/|, finishing it by running \verb|texhash|.
+In case you're using Unix and/or \TeX Live you need to have a local directory (this will probably be \verb|~/texmf/|) and you need to place all the files from the \verb|theme/| folder in the directory \verb|~/texmf/tex/latex/beamer/themes/UGent/|, finishing it by running \verb|texhash|.
 
 If on the other hand you're on Windows (and I assume you are using MiK\TeX, as does 100\% of the population based on my experience) the walkthrough at \url{http://docs.miktex.org/manual/localadditions.html} explains thoroughly and with \emph{many} pictures how to create a local installation. If you've done this you have to put the files from \verb|theme/| in the newly created directory structure as explained in the case of a Unix install. You might not care about nice installs in which case you can just put everything in \verb|C:/Program Files/MiKTeX 2.9/tex/latex/beamer/themes/UGent/| but you'll need administrator privileges.
 
@@ -156,25 +158,39 @@ The theme comes with several options, all of which can be given in a comma-separ
   If you don't care about the technical details, you can skip this and directly go to Subsection \ref{subsection:usingthecolors}.
 \end{note}
 
-The two official colors of the UGent, a blue and a red tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
+The two official colors of the UGent, a blue and a yellow tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
 
 The PMS format is richer than RGB in the sense that it can embrace fluorescence effects, gold or silver shine, special coatings (matte and brilliant), in general everything that has to do with the actual appearance of the color on the medium. It comes thus as no surprise that there is no (exact) mapping between the PMS and RGB color spaces; more specifically: the mapping -- if it exists -- is device-dependent.
 
-The \emph{only} way to get a perfect PMS 1955 red, for example, is to have a the plot file ready with the (proprietary) PMS color information in it, and have it printed on a PMS-ready printer which needs to be filled the special PMS 1955 ink beforehand. This process is eponymous for colors which are not composed of different types of (yellow, blue, red) inks: they are called \emph{single-spot colors}, and most Pantone\textsuperscript{\textregistered} colors are of such kind.
+The \emph{only} way to get a perfect PMS 534 blue, for example, is to have a the plot file ready with the (proprietary) PMS color information in it, and have it printed on a PMS-ready printer which needs to be filled the special PMS 534 ink beforehand. This process is eponymous for colors which are not composed of different types of (yellow, blue, red) inks: they are called \emph{single-spot colors}, and most Pantone\textsuperscript{\textregistered} colors are of such kind.
 
 
 \subsection{Conversion to RGB/CMYK}
 
 When the computer screen or any other non-PMS-ready medium is the primary output source, having such rigorous rules may be rather obstructive. To overcome such restrictions, many vendors of graphical software try to translate PMS into RGB/CMYK by making use of special monitor color calibration data (e.g., the ICC color profiles, \lstinline!.icc!). Unfortunately, if files containing PMS color information are displayed (printed) with programs (printers) which do not support PMS mechanisms (which is most often the case in non-professional environments), the color output will look disturbed. On top of that, and surprisingly for the novice, the output will look disturbed in different ways on different screens (printers) because of the inherent device-dependence of PMS.
 
-%To overcome the undesired side-effects of working with the official UA corporate design in a non-PMS environment (like most beamers and computer screens should provide),
-That is why this theme aims to use non-PMS versions of the UA's official colors, including modified versions of the logos.\todo{what should I do?}
+That is why this theme aims to use non-PMS versions of the UGent's official colors, where I have taken the RGB values used in specifying the colors used in the theme by color picking the resulting \verb|pdf|'s of the headers. That way regardless of whether they use the correct colors everything is consistent.
 
-Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UGent \cite{KAN::}, you'll find particular RGB and CMYK values, other resources, e.g., \cite{::TDC}, provide other numbers (see table \ref{table:reds-blues}).
+Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UGent (see \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/elementen/loc_index#kleuren}) you'll find particular RGB values for \verb|ugentblue| and \verb|ugentyellow| while lacking values for the faculty colors. Other resources, e.g., \cite{conversion-chart}, provide other numbers (see table \ref{table:blues-and-yellows}).
 
-For the sake of consistency between RGB and CMYK values, the UGent \texttt{beamer} theme uses the CMYK values for PMS 302 and PMS 1955 provided on \cite{::TDC} for reference (see table \ref{table:reds-blues}, last column, and table \ref{table:allcolors}).
+\newlength\boxsize
+\setlength\boxsize{2cm}
+\begin{table}
+  \centering
+  \begin{tabular}{cccc}
+    \definecolor{ugentbluergb}{RGB}{10,30,96}\colorbox{ugentbluergb}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
+    & \definecolor{ugentbluecmyk}{cmyk}{0.8726,0.6981,0.2617,0.0436}\colorbox{ugentbluecmyk}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
+    & \colorbox{ugentblue}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}} \\[2mm]
+    \definecolor{ugentyellowrgb}{RGB}{255,179,0}\colorbox{ugentyellowrgb}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
+    & \definecolor{ugentyellowcmyk}{cmyk}{0,0.2617,0.8726,0}\colorbox{ugentyellowcmyk}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
+    & \colorbox{ugentyellow}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}} \\[2mm]
+  \end{tabular}
+  \caption{PMS 534 and PMS 130 translated to CMYK/RGB in different ways. Left to right: UGent website \cite{ugent-color-guide} RGB, UGent website \cite{ugent-color-guide} CMYK, actual value in use by the theme as determined by color picking the headers. \\ To determine which version is closest to the actual colors PMS 534 and PMS 130 on your monitor/printer/beamer, you would need a physical color sample (such as provided on the Pantone\textsuperscript{\textregistered} charts) to compare.}
+  \label{table:blues-and-yellows}
+\end{table}
 
 \subsection{Using the colors}\label{subsection:usingthecolors}
+
 
 \newlength\facultieswidth
 \setlength\facultieswidth{8cm}
@@ -229,10 +245,10 @@ For the sake of consistency between RGB and CMYK values, the UGent \texttt{beame
     \verb|ps|
     & \parbox\facultieswidth{Faculty of Political and Social Sciences \\ Faculteit Politieke en Sociale Wetenschappen}
     & \parbox\colorwidth{Pantone 103c \\ \extractcolorspecs{ugent-lw}\modelspec\colorspec \convertcolorspec\modelspec\colorspec{RGB}\colorspec RGB\colorspec}
-    & \colorsquare\figurewidth{ugent-ps} \\
+    & \colorsquare\figurewidth{ugent-ps} \\\bottomrule
   \end{tabular}
   \caption{Overview of the faculties and their respective colors}
-  \label{table:TODO}
+  \label{table:faculty-values}
 \end{table}
 
 
@@ -240,16 +256,16 @@ Getting a consistent look-and-feel throughout your presentations requires sticki
 
 Although essentially consistent of only two colors, within \texttt{beamer} referred to as \lstinline!ugentblue! and \lstinline!ugentyellow!, provide more diversity than one might expect and should be  \emph{exclusively} used  in all the slides. The user should be aware that this directive includes \emph{tables, figures, and graphics of most kinds}. For an example of usage see figure \ref{fig:coloredgraphs}.
 
+\setlength\figurewidth{10cm}
+\setlength\figureheight{5cm}
 \begin{figure}
-  \setlength\figurewidth{10cm}
-  \setlength\figureheight{5cm}
   \centering
-  %\input{figures/graphs.tikz}
-  \caption{Example usage of the official colors within a set of graphs, using also the exception color.}
+  \input{figures/graphs.tikz}
+  \caption{Example usage of the official colors within a set of graphs, using also an exception color, which happens to be \lstinline|ugent-re|.}
   \label{figure:coloredgraphs}
 \end{figure}
 
-If you need to emphasize a particular aspect in your slides (graphs, tables), you can (within \texttt{beamer}) use the \lstinline!\alert{}! macro (e.g., \lstinline!\alert{This is alerted text.}!). For the situation where something needs to stick out in a pie chart, for example, where the ordinary colors (UA blue and red) have been used up already, a third color has been added (see table \ref{table:allcolors}). It is to be used scarcely and strictly for highlighting purposes (see, for example, figure \ref{fig:coloredgraphs}).
+If you need to emphasize a particular aspect in your slides (graphs, tables), you can (within \texttt{beamer}) use the \lstinline!\alert{}! macro (e.g., \lstinline!\alert{This is alerted text.}!). For the situation where something needs to stick out in a pie chart, for example, where the ordinary colors (UGent blue and yellow) have been used up already, you can choose to use the color of your faculty (if specified) which is available in \lstinline|ugent-faculty| or choose a color from Table~\ref{table:faculty-values} as these have been designed to match the standard colors of UGent. It is to be used scarcely and strictly for highlighting purposes (see, for example, Figure \ref{fig:coloredgraphs}).
 
 
 \begin{table}
