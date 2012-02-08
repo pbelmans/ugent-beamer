@@ -14,6 +14,8 @@
 
 \input{colors}
 
+\ifbeamer@faculty\colorlet{ugent-faculty}{ugent-\beamer@facultyvalue}\fi
+
 % switch between the generic yellow use of highlights or faculty specific colors
 \ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolors} }
 {
