@@ -1,8 +1,10 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage{amsthm}
+\usepackage[language = auto, style = numeric, backend = biber, abbreviate = false, dateabbrev = long, alldates = long]{biblatex}
 \usepackage{booktabs}
-\usepackage[margin=1.4in]{geometry}
+\usepackage[margin=1.3in]{geometry}
 \usepackage{graphicx}
+\usepackage{minted}
 \usepackage{pgfplots}
 \usepackage{subfig}
 \usepackage{tabulary}
@@ -10,7 +12,6 @@
 \usepackage{todonotes}
 \usepackage{xcolor}
 
-\usepackage[backend=biber]{biblatex}
 \bibliography{bibliography.bib}
 
 \usepackage[T1]{fontenc}
@@ -18,29 +19,17 @@
 \usepackage[scaled]{beramono,berasans}
 \usepackage{microtype}
 
-\usepackage{listings}
-\lstset{
-  basicstyle = \ttfamily,
-  keywordstyle = \color{ugentblue},
-  identifierstyle =,
-  commentstyle = \color{olive},
-  stringstyle = \color{ugentyellow},
-  showstringspaces = false,
-  frame = single,
-  language = [LaTeX]TeX
-}
-
 \usepackage[bookmarks, colorlinks, linkcolor = ugentblue, citecolor=ugentblue, urlcolor=ugentblue, pdftitle={A beamer presentation class theme for the University of Ghent}, pdfauthor={Pieter Belmans}]{hyperref}
 
+\usemintedstyle{friendly}
+
+\theoremstyle{definition}
 \newtheorem{note}{Note}
-\newlength{\figurewidth}
-\newlength{\figureheight}
-
-\newcommand{\changefont}[3]{\fontfamily{#1}\fontseries{#2}\fontshape{#3}\selectfont}
-
+\newlength\figurewidth
+\newlength\figureheight
 
 \title{A \texttt{beamer} presentation class theme for the University of Ghent}
-\author{Pieter Belmans\thanks{e-mail: \href{mailto:pieter.belmans@ugent.be}{\nolinkurl{pieter.belmans@ugent.be}}. Comments and suggestions always welcome.}}
+\author{Pieter Belmans\thanks{e-mail: \href{mailto:pieter.belmans@ugent.be}{\nolinkurl{pieter.belmans@ugent.be}}, personal website \url{http://pbelmans.wordpress.com}}}
 \date{Version 1 \\ \today}
 
 \input{../theme/colors.tex}
@@ -60,7 +49,9 @@
 \maketitle
 
 \begin{abstract}
-  This is a theme for the \LaTeX\ \texttt{beamer} class for presentations. It has been designed to match the official UGent templates for Microsoft PowerPoint\textsuperscript{\textregistered} while doing away with some of the shortcomings of it within the \texttt{beamer} framework. If you would like to give a scientific presentation with all the benefits you get from using \LaTeX, this theme is for you.\footnote{Note that there exists another \texttt{beamer} theme for the University of Ghent (or at least the Engineering faculty) designed by \textsc{Harald Devos} \cite{devos-theme}. In contrast to this theme, it is not designed with compliance to the official themes in mind and it is not tailored to easy integration with the different faculties.}
+  This is a theme for the \LaTeX\ \texttt{beamer} class for presentations. It has been designed to match the official UGent templates for Microsoft PowerPoint\textsuperscript{\textregistered} while doing away with some of the shortcomings of it within the \texttt{beamer} framework. If you would like to give a scientific presentation with all the benefits you get from using \LaTeX, this theme is for you.\footnote{Note that there exists another \texttt{beamer} theme for the University of Ghent (or at least the Faculty of Engineering and Architecture) designed by \textsc{Harald Devos} \cite{devos-theme}. In contrast to this theme, it is not designed with compliance to the official themes in mind and it is not tailored to easy integration with the different faculties.}
+
+  It is an adaption of Nico Schl\"omers \texttt{ua-beamer} \cite{ua-beamer}. The philosophy of the theme, its documentation and especially everything related to colors is heavily based on his work.
 \end{abstract}
 
 
@@ -71,92 +62,88 @@
 
 \subsection{Getting the package}
 
-The package is distributed via GitHub \cite{ugent-beamer}. You can get the latest releases there, as well as additional information about the package. More specifically the Downloads page at \url{https://github.com/pbelmans/ugent-beamer/downloads} will serve most of your needs. If you would like to stay on the bleeding edge of development, you can get access to the Git repository by
-\begin{lstlisting}
+The package is distributed via GitHub \cite{ugent-beamer}. You can get the latest releases there, as well as additional information about the package. More specifically the Downloads page located at \url{https://github.com/pbelmans/ugent-beamer/downloads} will serve most of your needs. If you would like to stay on the bleeding edge of development, you can get access to the Git repository by
+\begin{minted}[frame=lines]{sh}
 $ git clone git@github.com:pbelmans/ugent-beamer.git
-\end{lstlisting}
+\end{minted}
 You are free to improve and extend the implementation, preferably by forking and merging to keep development centralized.
 
 
 \subsection{First run}
 Once you have the files, all that is required for the theme to work is putting the files into a directory where \LaTeX{} can find them. This boils down to mimicking the so called TDS (or \TeX\ Directory Structure).
 
-In case you're using Unix and/or \TeX Live you need to have a local directory (this will probably be \verb|~/texmf/|) and you need to place all the files from the \verb|theme/| folder in the directory \verb|~/texmf/tex/latex/beamer/themes/UGent/|, finishing it by running \verb|texhash|.
+In case you're using your favorite flavor of Unix (and/or \TeX Live) you need to have a local directory (this will probably be \verb|~/texmf/|) and you need to place all the files from the \verb|theme/| folder in the directory \verb|~/texmf/tex/latex/beamer/themes/UGent/|, finishing it by running \verb|texhash|.
 
-If on the other hand you're on Windows (and I assume you are using MiK\TeX, as does 100\% of the population based on my experience) the walkthrough at \url{http://docs.miktex.org/manual/localadditions.html} explains thoroughly and with \emph{many} pictures how to create a local installation. If you've done this you have to put the files from \verb|theme/| in the newly created directory structure as explained in the case of a Unix install. You might not care about nice installs in which case you can just put everything in \verb|C:/Program Files/MiKTeX 2.9/tex/latex/beamer/themes/UGent/| but you'll need administrator privileges.
+If on the other hand you're on Windows (and I assume you are using MiK\TeX, as does 100\% of the population based on my experience) the walkthrough at \url{http://docs.miktex.org/manual/localadditions.html} explains thoroughly and with \emph{many} pictures how to create a local installation. If you've done this you have to put the files from \verb|theme/| in the newly created directory structure as explained in the case of a Unix install, i.e.\ if you've followed the tutorial to the letter the files will be placed in \verb|C:\Local TeX Files\tex\latex\beamer\themes\UGent\| and don't forget to Refresh FNDB as explained at \url{http://docs.miktex.org/manual/configuring.html#fndbupdate}. You might not care about nice installs in which case you can just put everything in \verb|C:\Program Files\MiKTeX 2.9\tex\latex\beamer\themes\UGent\| but you'll need administrator privileges.
 
-If everything seems okay, you can check whether you can actually produce a presentation with the UGent theme by either creating a minimal test file (see Listing \ref{listing:minimal-example}) or by compiling the \LaTeX-document provided in the \lstinline!example/! folder of this package. 
-
-\begin{figure}
+\begin{figure}[t]
   \centering
   \setlength{\figurewidth}{6cm}
   \subfloat[][The first two pages, no faculty specified.]{%
+    \label{subfigure:example-output-normal-a}
     \frame{\includegraphics[width=\figurewidth]{figures/slide-1}}%
     \qquad
     \frame{\includegraphics[width=\figurewidth]{figures/slide-2}}%
   }
 
-  \subfloat[][The first two pages, with \lstinline|faculty=lw| and \lstinline|language=english| specified.]{%
+  \subfloat[][The first two pages, with \texttt{faculty=lw} and \texttt{language=english} specified.]{%
+    \label{subfigure:example-output-normal-b}
     \frame{\includegraphics[width=\figurewidth]{figures/slide-faculty-1}}%
     \qquad
     \frame{\includegraphics[width=\figurewidth]{figures/slide-faculty-2}}%
   }
+  \caption{The first two slides in two different configurations of the UGent \texttt{beamer} theme}
+  \label{figure:example-output}
 \end{figure}
+
+If everything seems okay, you can check whether you can actually produce a presentation with the UGent theme by either creating a minimal test file (see Listing \ref{listing:minimal-example}) or by compiling the \LaTeX-document provided in the \verb!example/! folder of this package. If you've decided to build the example file, you should get the output as given in Figure~\ref{figure:example-output}\subref{subfigure:example-output-normal-a}.
 
 \begin{note}
   You might need to install more \LaTeX{} packages when running the provided example file (e.g., the \texttt{lipsum} package).
 \end{note}
 
-\begin{lstlisting}[float,caption={A minimalistic test file for the UGent Beamer theme.},captionpos=b,label=listing:minimal-example,abovecaptionskip=\bigskipamount]
-\documentclass{beamer}
-
-\usetheme{UniversiteitGent}
-
-\begin{document}
-
-\begin{frame}
-  \frametitle{Example}
-  Hello world!
-\end{frame}
-
-\end{document}
-\end{lstlisting}
+\begin{listing}[ht]
+  \inputminted[frame=lines]{latex}{minimal.tex}
+  \caption{A minimalistic test file for the UGent \texttt{beamer} theme.}
+  \label{listing:minimal-example}
+\end{listing}
 
 
 \section{Theme options}
 
 The theme comes with several options, all of which can be given in a comma-separated list like in
-\begin{lstlisting}
+\begin{minted}[frame=lines]{tex}
 \usetheme[options]{UniversiteitGent}
-\end{lstlisting}
+\end{minted}
+The complete list of options that are currently supported is given in Table~\ref{table:options}.
 
-\begin{center}
-\begin{tabulary}{12cm}{p{3cm}L}
-  \toprule
-  \lstinline|faculty=| & Every faculty can (or should) use its own header, as explained at \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/kantoor/presentaties.htm} (only available to UGent members). This option needs a value, see Table~\ref{table:faculty-values} for an overview. Providing this value will only change the header, but it is related to the options \lstinline|language| and \lstinline|usecolours|. \\\midrule
-  \lstinline|language=| & The official template provides both an English and a Dutch header for each faculty, the default is taken to be the \emph{Dutch version}. In case you want to use the English version, provide the option \lstinline|language=english|. Remark that the default corresponds to \lstinline|language=dutch|, but it is not necessary to provide this. This valued approach is written with future extension in mind. \\\midrule
-  \lstinline|usecolors| & If you have provided a value for \lstinline|faculty=| and specify this option the faculty color (which is featured in the header) will be used in other parts of the presentation, e.g.\ in an \lstinline|alertblock|. Otherwise the standard color \lstinline|ugentyellow| is used (see Section~\ref{section:colors}). \\\midrule
-  \lstinline!framenumber! &  The \lstinline!framenumber! option makes sure that the number of the current frame is displayed. \\\midrule
-  \lstinline!totalframenumber! & With \lstinline!framenumber! turned on, the \lstinline!totalframenumber! option makes sure that the total number of frames is displayed alongside with the current frame number.\\\bottomrule
+\begin{table}
+  \begin{tabulary}{12cm}{p{3cm}L}
+    \toprule
+    \texttt{faculty=} & Every faculty can (or should) use its own header, as explained at \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/kantoor/presentaties.htm} (only available to UGent members). This option needs a value, see Table~\ref{table:faculty-values} for an overview. Providing this value will only change the header, but it is related to the options \texttt{language} and \texttt{usecolours}. \\\midrule
+    \texttt{language=} & The official template provides both an English and a Dutch header for each faculty, the default is taken to be the \emph{Dutch version}. In case you want to use the English version, provide the option \texttt{language=english}. Remark that the default corresponds to \texttt{language=dutch}, but it is not necessary to provide this. This valued approach is written with future extension in mind. \\\midrule
+    \texttt{usecolors} & If you have provided a value for \texttt{faculty=} and specify this option the faculty color (which is featured in the header) will be used in other parts of the presentation, e.g.\ in an \texttt{alertblock}. Otherwise the standard color \texttt{ugentyellow} is used (see Section~\ref{section:colors}). \\\midrule
+    \texttt{framenumber} & The \texttt{framenumber} option makes sure that the number of the current frame is displayed. \\\midrule
+    \texttt{totalframenumber} & With \texttt{framenumber} turned on, the \texttt{totalframenumber} option makes sure that the total number of frames is displayed alongside with the current frame number.\\\bottomrule
   \end{tabulary}
-\end{center}
+  \caption{All possible options of the UGent \texttt{beamer} theme}
+  \label{table:options}
+\end{table}
 
 \begin{note}
-  The \texttt{beamer} option \lstinline!compress! is respected in the sense that, if it is provided, header and footer will take less space such that there is more space for actual frame content\todo{implement this}. The navigational symbols are always hidden, regardless of this option.
+  Currently the \texttt{beamer} option \verb|compress| is not supported. The idea of the UA \texttt{beamer} theme of using less vertical margin is a good idea, but it is not feasible in the context of a theme that relies on a header (instead of a logo). In a way this option is always set, because I have disabled the navigation bar regardless of any options.
 \end{note}
 
 \begin{note}
-  Specifying a wrong value for the \lstinline|language=| option, or using \lstinline|usecolors| without specifying a value for \lstinline|faculty=| will result in errors.
+  Specifying a wrong value for the \verb|language=| option, or using \verb|usecolors| without specifying a value for \verb|faculty=| will result in errors.
 \end{note}
 
 
 \section{Colors}
+\label{section:colors}
 
 \subsection{Background on the official colors}
-
-\begin{note}
-  If you don't care about the technical details, you can skip this and directly go to Subsection \ref{subsection:usingthecolors}.
-\end{note}
+If you don't care about the technical details, you can skip this and directly go to Subsection \ref{subsection:usingthecolors}.
 
 The two official colors of the UGent, a blue and a yellow tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
 
@@ -167,11 +154,11 @@ The \emph{only} way to get a perfect PMS 534 blue, for example, is to have a the
 
 \subsection{Conversion to RGB/CMYK}
 
-When the computer screen or any other non-PMS-ready medium is the primary output source, having such rigorous rules may be rather obstructive. To overcome such restrictions, many vendors of graphical software try to translate PMS into RGB/CMYK by making use of special monitor color calibration data (e.g., the ICC color profiles, \lstinline!.icc!). Unfortunately, if files containing PMS color information are displayed (printed) with programs (printers) which do not support PMS mechanisms (which is most often the case in non-professional environments), the color output will look disturbed. On top of that, and surprisingly for the novice, the output will look disturbed in different ways on different screens (printers) because of the inherent device-dependence of PMS.
+When the computer screen or any other non-PMS-ready medium is the primary output source, having such rigorous rules may be rather obstructive. To overcome such restrictions, many vendors of graphical software try to translate PMS into RGB/CMYK by making use of special monitor color calibration data (e.g., the ICC color profiles, \verb!.icc!). Unfortunately, if files containing PMS color information are displayed (printed) with programs (printers) which do not support PMS mechanisms (which is most often the case in non-professional environments), the color output will look disturbed. On top of that, and surprisingly for the novice, the output will look disturbed in different ways on different screens (printers) because of the inherent device-dependence of PMS.
 
 That is why this theme aims to use non-PMS versions of the UGent's official colors, where I have taken the RGB values used in specifying the colors used in the theme by color picking the resulting \verb|pdf|'s of the headers. That way regardless of whether they use the correct colors everything is consistent.
 
-Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UGent (see \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/elementen/loc_index#kleuren}) you'll find particular RGB values for \verb|ugentblue| and \verb|ugentyellow| while lacking values for the faculty colors. Other resources, e.g., \cite{conversion-chart}, provide other numbers (see table \ref{table:blues-and-yellows}).
+Now, as explained above there is no device-independent conversion between the original PMS directives and the CMYK color space; several tables exist which are valid for different work environments. On the official sites of the UGent (see \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/elementen/loc_index#kleuren}) you'll find particular RGB values for \verb|ugentblue| and \verb|ugentyellow| while lacking values for the faculty colors. Other resources, e.g., \cite{conversion-chart}, provide other numbers (see Table \ref{table:blues-and-yellows}).
 
 \newlength\boxsize
 \setlength\boxsize{2cm}
@@ -185,7 +172,7 @@ Now, as explained above there is no device-independent conversion between the or
     & \definecolor{ugentyellowcmyk}{cmyk}{0,0.2617,0.8726,0}\colorbox{ugentyellowcmyk}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}}
     & \colorbox{ugentyellow}{\rule{0mm}{\boxsize}\rule{\boxsize}{0mm}} \\[2mm]
   \end{tabular}
-  \caption{PMS 534 and PMS 130 translated to CMYK/RGB in different ways. Left to right: UGent website \cite{ugent-color-guide} RGB, UGent website \cite{ugent-color-guide} CMYK, actual value in use by the theme as determined by color picking the headers. \\ To determine which version is closest to the actual colors PMS 534 and PMS 130 on your monitor/printer/beamer, you would need a physical color sample (such as provided on the Pantone\textsuperscript{\textregistered} charts) to compare.}
+  \caption{PMS 534 and PMS 130 translated to CMYK/RGB in different ways. Left to right: UGent website \cite{ugent-color-guide} RGB, UGent website \cite{ugent-color-guide} CMYK, actual value in use by the theme as determined by color picking the headers. To determine which version is closest to the actual colors PMS 534 and PMS 130 on your monitor/printer/beamer, you would need a physical color sample (such as provided on the Pantone\textsuperscript{\textregistered} charts) to compare.}
   \label{table:blues-and-yellows}
 \end{table}
 
@@ -196,9 +183,10 @@ Now, as explained above there is no device-independent conversion between the or
 \setlength\facultieswidth{8cm}
 \newlength\colorwidth
 \setlength\colorwidth{2.75cm}
-\setlength\figurewidth{6mm}
+\setlength\figurewidth{5mm}
 \begin{table}
   \centering
+  \small
   \begin{tabular}{cp{\facultieswidth}p{\colorwidth}c}
     \toprule
     value & faculty & color & example \\\midrule
@@ -251,133 +239,57 @@ Now, as explained above there is no device-independent conversion between the or
   \label{table:faculty-values}
 \end{table}
 
-
 Getting a consistent look-and-feel throughout your presentations requires sticking to a particular style scheme, most of which is being implemented in the \texttt{beamer} style file already. One particular aspect, though, can only be controlled by the user, and that is the colors that are used in the running text, tables, and figures.
 
-Although essentially consistent of only two colors, within \texttt{beamer} referred to as \lstinline!ugentblue! and \lstinline!ugentyellow!, provide more diversity than one might expect and should be  \emph{exclusively} used  in all the slides. The user should be aware that this directive includes \emph{tables, figures, and graphics of most kinds}. For an example of usage see figure \ref{fig:coloredgraphs}.
+Although essentially consistent of only two colors, within \texttt{beamer} referred to as \verb!ugentblue! and \verb!ugentyellow! (see Table~\ref{table:all-colors}, provide more diversity than one might expect and should be \emph{exclusively} used in all the slides. The user should be aware that this directive includes \emph{tables, figures, and graphics of most kinds}. For an example of this behavior see Figure \ref{figure:colored-graphs}.
 
 \setlength\figurewidth{10cm}
 \setlength\figureheight{5cm}
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \input{figures/graphs.tikz}
-  \caption{Example usage of the official colors within a set of graphs, using also an exception color, which happens to be \lstinline|ugent-re|.}
-  \label{figure:coloredgraphs}
+  \caption{Example usage of the official colors within a set of graphs, using also an exception color, which happens to be \texttt{ugent-re}.}
+  \label{figure:colored-graphs}
 \end{figure}
 
-If you need to emphasize a particular aspect in your slides (graphs, tables), you can (within \texttt{beamer}) use the \lstinline!\alert{}! macro (e.g., \lstinline!\alert{This is alerted text.}!). For the situation where something needs to stick out in a pie chart, for example, where the ordinary colors (UGent blue and yellow) have been used up already, you can choose to use the color of your faculty (if specified) which is available in \lstinline|ugent-faculty| or choose a color from Table~\ref{table:faculty-values} as these have been designed to match the standard colors of UGent. It is to be used scarcely and strictly for highlighting purposes (see, for example, Figure \ref{fig:coloredgraphs}).
+If you need to emphasize a particular aspect in your slides (graphs, tables), you can (within \texttt{beamer}) use the \verb!\alert{}! macro (e.g., \verb!\alert{This is alerted text.}!). For the situation where something needs to stick out in a pie chart, for example, where the ordinary colors (UGent blue and yellow) have been used up already, you can choose to use the color of your faculty (if specified) which is available in \verb|ugent-faculty| or choose a color from Table~\ref{table:faculty-values} as these have been designed to match the standard colors of UGent. A color from this table is accessed by prefixing the code from the table with \verb|ugent-|, i.e.\ to access the Pantone 485c from the Faculty of Law you use \verb|ugent-re|. These are to be used scarcely and strictly for highlighting purposes (see, for example, Figure \ref{figure:colored-graphs}).
 
+As said earlier, the color of your faculty (if specified) is available in the variable \verb|ugent-faculty|. If for some reason you don't like this color and wish to use another, it can be easily reset using
+\begin{minted}[frame=lines]{tex}
+\colorlet{ugent-faculty}{ugent-we}
+\end{minted}
+where we have set the color of our faculty to the Pantone 292c as used by the Faculty of Sciences. 
 
-\begin{table}
+\begin{table}[ht]
   \setlength\figurewidth{15mm}
   \centering
+  \small
   \begin{tabulary}{\textwidth}{LCCC}
     \toprule
     Color sample & \colorsquare{\figurewidth}{ugentblue!100!white} & \colorsquare{\figurewidth}{ugentblue!75!white} & \colorsquare{\figurewidth}{ugentblue!50!white}\\
     CMYK & (100, 30, 0, 62) & (75, 23, 0, 47) & (50, 15, 0, 31)\\
     RGB  & (0, 61, 100)     & (40, 128, 158)  & (96, 166, 191)\\
-    \texttt{beamer} name & \lstinline|ugentblue!100!white| & \lstinline|ugentblue!75!white| & \lstinline|ugentblue!50!white| \\[3mm]
+    \texttt{beamer} name & \texttt{ugentblue!100!white} & \texttt{ugentblue!75!white} & \texttt{ugentblue!50!white} \\[3mm]
     Color sample & \colorsquare{\figurewidth}{ugentblue!25!white} & \colorsquare{\figurewidth}{ugentblue!10!white} & \colorsquare{\figurewidth}{ugentblue!5!white}\\
     CMYK & (25, 8, 0, 16)  & (10, 3, 0, 6)   & (5, 2, 0, 3)\\
     RGB  & (166, 209, 222) & (218, 235, 242) & (235, 245, 247)\\
-    \texttt{beamer} name & \lstinline!ugentblue25! & \lstinline!ugentblue10! & \lstinline!ugentblue5!\\\midrule
+    \texttt{beamer} name & \texttt{ugentblue!25!white} & \texttt{ugentblue!10!white} & \texttt{ugentblue!5!white} \\\midrule
   
-  Color sample & \colorsquare{\figurewidth}{ugentyellow!100!white} & \colorsquare{\figurewidth}{ugentyellow!75!white} & \colorsquare{\figurewidth}{ugentyellow!50!white}\\
-  CMYK & (0, 100, 54, 46) & (0, 75, 41, 35) & (0, 50, 27, 23)\\
-  RGB  & (161, 0, 64)     & (184, 46, 101)  & (207, 103, 145)\\
-  \texttt{beamer} name & \lstinline|ugentyellow!100!white| & \lstinline|ugentyellow!75!white| & \lstinline|ugentyellow!50!white| \\[3mm]
-  Color sample & \colorsquare{\figurewidth}{ugentyellow!25!white} & \colorsquare{\figurewidth}{ugentyellow!10!white} & \colorsquare{\figurewidth}{ugentyellow!5!white}\\
-  CMYK & (0, 25, 14, 12)  & (0, 10, 5, 5)   & (0, 5, 3, 2)\\
-  RGB  & (232, 174, 197) & (245, 220, 230) & (250, 237, 242)\\
-  \texttt{beamer} name & \lstinline|ugentyellow!25!white| & \lstinline|ugentyellow!10!white| & \lstinline|ugentyellow!5!white| \\\midrule
+    Color sample & \colorsquare{\figurewidth}{ugentyellow!100!white} & \colorsquare{\figurewidth}{ugentyellow!75!white} & \colorsquare{\figurewidth}{ugentyellow!50!white}\\
+    CMYK & (0, 100, 54, 46) & (0, 75, 41, 35) & (0, 50, 27, 23)\\
+    RGB  & (161, 0, 64)     & (184, 46, 101)  & (207, 103, 145)\\
+    \texttt{beamer} name & \texttt{ugentyellow!100!white} & \texttt{ugentyellow!75!white} & \texttt{ugentyellow!50!white} \\[3mm]
+    Color sample & \colorsquare{\figurewidth}{ugentyellow!25!white} & \colorsquare{\figurewidth}{ugentyellow!10!white} & \colorsquare{\figurewidth}{ugentyellow!5!white}\\
+    CMYK & (0, 25, 14, 12)  & (0, 10, 5, 5)   & (0, 5, 3, 2)\\
+    RGB  & (232, 174, 197) & (245, 220, 230) & (250, 237, 242)\\
+    \texttt{beamer} name & \texttt{ugentyellow!25!white} & \texttt{ugentyellow!10!white} & \texttt{ugentyellow!5!white} \\\midrule
+  \end{tabulary}
 
-%Color sample & \colorsquare{\figurewidth}{vividbrown} & \colorsquare{\figurewidth}{vividbrown75} & \colorsquare{\figurewidth}{vividbrown50}\\
-%CMYK & (0, 28, 67, 16) & (0, 20, 48, 12) & (0, 13, 31, 8)\\
-%RGB  & (215, 154, 70) & (225, 179, 116)  & (235, 205, 163)\\
-%\texttt{beamer} name & \lstinline!vividbrown100! & \lstinline!vividbrown75! & \lstinline!vividbrown50!\\[3mm]
-%Color sample & \colorsquare{\figurewidth}{vividbrown25} & \colorsquare{\figurewidth}{vividbrown10} & \colorsquare{\figurewidth}{vividbrown5}\\
-%CMYK & (0, 6, 15, 4) & (0, 2, 6, 2) & (0, 1, 3, 1)\\
-%RGB  & (245, 230, 209)  & (251, 245, 237) & (253, 250, 246)\\
-%\texttt{beamer} name & \lstinline!vividbrown25! & \lstinline!vividbrown10! & \lstinline!vividbrown5!\\\bottomrule
-\end{tabulary}
-
-\caption{Overview over the two main colors used in theme as well as the third color for exceptions and highlighting.}
-\label{table:allcolors}
+  \caption{Overview of the two main colors used in theme.}
+  \label{table:all-colors}
 \end{table}
 
-%\begin{table}
-%\begin{tabular*}{\textwidth}{cc}
-%\toprule
-%Category 1 &
-%\colorbox{ugentblue100}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentblue75}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentblue50}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentblue25}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentblue10}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentblue5}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%&
-%\colorbox{ugentyellow100}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentyellow75}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentyellow50}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentyellow25}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentyellow10}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{ugentyellow5}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\\midrule
-%Category 2 &
-%\colorbox{col22}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22!75!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22!50!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22!25!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22!10!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22!5!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%&
-%\colorbox{col24}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24!75!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24!50!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24!25!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24!10!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24!5!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%&
-%\colorbox{col21}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col21!75!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col21!50!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col21!25!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col21!10!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col21!5!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%&
-%\colorbox{col42}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42!75!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42!50!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42!25!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42!10!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42!5!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\\midrule
-%Alert color &
-%\colorbox{col32}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32!75!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32!50!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32!25!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32!10!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32!5!white}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\\bottomrule
-%\end{tabular*}
-%\caption{Color table.}
-%\end{table}
-
-%\colorbox{col11}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col12}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col13}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col14}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%\colorbox{col21}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col22}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col23}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col24}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%\colorbox{col31}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col32}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col33}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col34}{\rule{0mm}{5mm}\rule{5mm}{0mm}}\\
-%\colorbox{col41}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col42}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col43}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-%\colorbox{col44}{\rule{0mm}{5mm}\rule{5mm}{0mm}}
-
+\clearpage
 \printbibliography
 
 \end{document}
