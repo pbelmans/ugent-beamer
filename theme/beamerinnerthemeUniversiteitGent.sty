@@ -31,6 +31,11 @@
       \vskip2ex%
       \usebeamerfont{author}\usebeamercolor[fg]{author}\insertinstitute%
     \fi%
+    \ifx\insertdate\@empty%
+    \else%
+      \vskip4ex%
+      \usebeamerfont{author}\usebeamercolor[fg]{author}\insertdate%
+    \fi%
   \end{center}
   \vfill%
 }
