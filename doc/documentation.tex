@@ -12,7 +12,8 @@
 \usepackage{todonotes}
 \usepackage{xcolor}
 
-\bibliography{bibliography.bib}
+\DeclareFieldFormat[software,manual]{title}{#1}
+\addbibresource{bibliography.bib}
 
 \usepackage[T1]{fontenc}
 \usepackage[charter]{mathdesign}
@@ -21,7 +22,7 @@
 
 \usepackage[bookmarks, colorlinks, linkcolor = ugentblue, citecolor=ugentblue, urlcolor=ugentblue, pdftitle={A beamer presentation class theme for the University of Ghent}, pdfauthor={Pieter Belmans}]{hyperref}
 
-\usemintedstyle{friendly}
+\usemintedstyle{ugent}
 
 \theoremstyle{definition}
 \newtheorem{note}{Note}
@@ -30,7 +31,7 @@
 
 \title{A \texttt{beamer} presentation class theme for the University of Ghent}
 \author{Pieter Belmans\thanks{e-mail: \href{mailto:pieter.belmans@ugent.be}{\nolinkurl{pieter.belmans@ugent.be}}, personal website \url{http://pbelmans.wordpress.com}}}
-\date{Version 1 \\ \today}
+\date{Version 1.3 \\ \today}
 
 \input{../theme/colors.tex}
 
@@ -96,10 +97,14 @@ If on the other hand you're on Windows (and I assume you are using MiK\TeX, as d
   \label{figure:example-output}
 \end{figure}
 
-If everything seems okay, you can check whether you can actually produce a presentation with the UGent theme by either creating a minimal test file (see Listing \ref{listing:minimal-example}) or by compiling the \LaTeX-document provided in the \verb!example/! folder of this package. If you've decided to build the example file, you should get the output as given in Figure~\ref{figure:example-output}\subref{subfigure:example-output-normal-a}.
+If everything seems okay, you can check whether you can actually produce a presentation with the UGent theme by either creating a minimal test file (see Listing \ref{listing:minimal-example}) or by compiling the \LaTeX-document provided in the \verb!example/! folder of this package. If you've decided to build the example file, you should get the output as given in Figure~\ref{figure:example-output}\subref{subfigure:example-output-normal-a}, but with the appropriate date.
 
 \begin{note}
   You might need to install more \LaTeX{} packages when running the provided example file (e.g., the \texttt{lipsum} package).
+\end{note}
+
+\begin{note}
+  If you wish to remove the date from the slides, add \mint{tex}|\date{}|. To control the language in which the date is printed (if you opt for automatic dates), use the \texttt{babel} package \cite{babel}. You will probably need to add \mint{tex}|\usepackage[dutch]{babel}| to your preamble. Remark that this is independent of the \texttt{language=} option as explained in Table~\ref{table:options}.
 \end{note}
 
 \begin{listing}[ht]
@@ -111,7 +116,7 @@ If everything seems okay, you can check whether you can actually produce a prese
 
 \section{Theme options}
 
-The theme comes with several options, all of which can be given in a comma-separated list like in
+The theme comes with several options, all of which can be given in a comma-separated list:
 \begin{minted}[frame=lines]{tex}
 \usetheme[options]{UniversiteitGent}
 \end{minted}
@@ -122,6 +127,7 @@ The complete list of options that are currently supported is given in Table~\ref
     \toprule
     \texttt{faculty=} & Every faculty can (or should) use its own header, as explained at \url{http://www.ugent.be/nl/werken/organisatie/huisstijl/kantoor/presentaties.htm} (only available to UGent members). This option needs a value, see Table~\ref{table:faculty-values} for an overview. Providing this value will only change the header, but it is related to the options \texttt{language} and \texttt{usecolours}. \\\midrule
     \texttt{language=} & The official template provides both an English and a Dutch header for each faculty, the default is taken to be the \emph{Dutch version}. In case you want to use the English version, provide the option \texttt{language=english}. Remark that the default corresponds to \texttt{language=dutch}, but it is not necessary to provide this. This valued approach is written with future extension in mind. \\\midrule
+    \texttt{nophotos} & If you have provided a value for \texttt{faculty=} and specify this option the pictures in the frame header will be replaced by a monochromous header with the correct faculty color. \\\midrule
     \texttt{usecolors} & If you have provided a value for \texttt{faculty=} and specify this option the faculty color (which is featured in the header) will be used in other parts of the presentation, e.g.\ in an \texttt{alertblock}. Otherwise the standard color \texttt{ugentyellow} is used (see Section~\ref{section:colors}). \\\midrule
     \texttt{framenumber} & The \texttt{framenumber} option makes sure that the number of the current frame is displayed. \\\midrule
     \texttt{totalframenumber} & With \texttt{framenumber} turned on, the \texttt{totalframenumber} option makes sure that the total number of frames is displayed alongside with the current frame number.\\\bottomrule
@@ -144,6 +150,8 @@ The complete list of options that are currently supported is given in Table~\ref
 
 \subsection{Background on the official colors}
 If you don't care about the technical details, you can skip this and directly go to Subsection \ref{subsection:usingthecolors}.
+
+\vspace{1em}
 
 The two official colors of the UGent, a blue and a yellow tone, are originally given in PMS format, a \emph{proprietary} format issued by the Pantone Inc.\ corporation. One particular feature of the PMS color format is that it is, as opposed to RGB or CMYK, \emph{device independent}. This means that the definition of the color does not consist of instructions such as \enquote{put 37\% red, 12\% green, and 45\% blue and mix it all together}, but really is a concise description of what the final result, be it printed or displayed, physically looks like on the medium under determined ambient light conditions.
 
@@ -259,6 +267,10 @@ As said earlier, the color of your faculty (if specified) is available in the va
 \colorlet{ugent-faculty}{ugent-we}
 \end{minted}
 where we have set the color of our faculty to the Pantone 292c as used by the Faculty of Sciences. 
+
+\begin{note}
+  If you wish to include highlighted code fragments, it is a good idea to use Pygments \cite{pygments} in conjunction with the \texttt{ugent-pygments-style} \cite{ugent-pygments-style}. This style file uses the official colors as explained in this section, hence it is well-suited for use in this \texttt{beamer} theme.
+\end{note}
 
 \begin{table}[ht]
   \setlength\figurewidth{15mm}
