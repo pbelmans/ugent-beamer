@@ -18,8 +18,10 @@
 \newif\ifbeamer@usefacultycolors\beamer@usefacultycolorsfalse
 \DeclareOptionBeamer{usecolors}{\beamer@usefacultycolorstrue}
 
-\newif\ifbeamer@footline\beamer@footlinefalse
-\DeclareOptionBeamer{footline}{\beamer@footlinetrue}
+\newif\ifbeamer@footline
+\beamer@footlinefalse
+\newcommand\beamer@footlinevalue{}
+\DeclareOptionBeamer{footline}{\beamer@footlinetrue\renewcommand\beamer@footlinevalue{#1}}
 
 \newcommand\beamer@languagevalue{dutch}
 \DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}

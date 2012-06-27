@@ -62,7 +62,11 @@
 \defbeamertemplate*{footline}{ugent theme}
 {%
   \ifbeamer@footline
-    \pgftext[bottom, left, at = \pgfpoint{0.02\paperwidth}{0.02\paperwidth}]{\insertinstitute}%
+    \ifnum\pdf@strcmp{\beamer@footlinevalue}{sections}=0
+      \pgftext[bottom, left, at = \pgfpoint{0.02\paperwidth}{0.02\paperwidth}]{\insertsectionhead}%
+    \else
+      \pgftext[bottom, left, at = \pgfpoint{0.02\paperwidth}{0.02\paperwidth}]{\insertinstitute}%
+    \fi
     \pgftext[bottom, at = \pgfpoint{0.5\paperwidth}{0.02\paperwidth}]{\insertauthor}%
   \fi
   \ifbeamer@framenumber%
